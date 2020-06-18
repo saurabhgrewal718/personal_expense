@@ -14,9 +14,11 @@ class TransactionLisst extends StatelessWidget {
   TransactionLisst(this.transactions); 
   @override
   Widget build(BuildContext context) {
-    return Column(
-              children: transactions.map((tx) {
-                return Card(
+    return Container(
+              height: 350,
+              child: ListView.builder(
+                itemBuilder: (ctx,index){
+                 return Card(
                   child: Row(children: <Widget>[
                     Container(
                       margin: EdgeInsets.symmetric(
@@ -25,23 +27,25 @@ class TransactionLisst extends StatelessWidget {
                       ),
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(border: Border.all(color: Colors.black,width: 2,)),
-                      child: Text('\$ ${tx.amount}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.purple),),
+                      child: Text('\$ ${transactions[index].amount}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.purple),),
                     ),
                     Column(
                       crossAxisAlignment:CrossAxisAlignment.start ,
                       children:<Widget>[
                         Text(
-                          tx.title,
+                          transactions[index].title,
                           style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.black)),
                         Text(
-                          DateFormat('dd/MM/yyyy').format(tx.date),
+                          DateFormat('dd/MM/yyyy').format(transactions[index].date),
                           style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: Colors.black26),
                         ),
                       ],
                     ),
                   ],)
                 );
-              }).toList(),
+                },
+                itemCount: transactions.length,
+    )
     );
   }
 }
