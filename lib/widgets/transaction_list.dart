@@ -27,7 +27,7 @@ class TransactionLisst extends StatelessWidget {
                       ),
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(border: Border.all(color: Colors.black,width: 2,)),
-                      child: Text('\$ ${transactions[index].amount}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.purple),),
+                      child: Text('\$ ${transactions[index].amount.toStringAsFixed(2)}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.purple),),
                     ),
                     Column(
                       crossAxisAlignment:CrossAxisAlignment.start ,
