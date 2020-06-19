@@ -32,18 +32,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 final List<Transaction> _usertransaction = [
-    // Transaction(
-    //   id:'t1',
-    //   amount: 89.87,
-    //   title: 'New Shoes',
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id:'t2',
-    //   amount: 8.87,
-    //   title: 'Shoes',
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id:'t1',
+      amount: 89.87,
+      title: 'New Shoes',
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id:'t2',
+      amount: 8.87,
+      title: 'Shoes',
+      date: DateTime.now(),
+    ),
     // Transaction(
     //   id:'t3',
     //   amount: 9.87,
@@ -62,11 +62,11 @@ final List<Transaction> _usertransaction = [
     }).toList();
   }
 
-  void _addNewTransaction(String txtitle,double txamount){
+  void _addNewTransaction(String txtitle,double txamount,DateTime choosenDate){
     final newTx = Transaction(
       title:txtitle,
       amount: txamount,
-      date: DateTime.now(),
+      date: choosenDate,
       id: DateTime.now().toString(),
     );
   
@@ -77,15 +77,39 @@ final List<Transaction> _usertransaction = [
 
   void _startAddNewTransaction(BuildContext ctx){
     showModalBottomSheet(
+      isScrollControlled:true,
       context: ctx, 
       builder: (_){
         return GestureDetector(
           onTap: (){},
-          child: NewTransaction(_addNewTransaction),
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 150,
+                  child: Image.asset('assets/images/victor.gif',fit: BoxFit.cover,),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: NewTransaction(_addNewTransaction),
+                ),
+                Text("Swipe down to go to home Screen",style: TextStyle(fontWeight: FontWeight.w100,color: Colors.black),),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Icon(Icons.arrow_downward),
+                ),
+              ],
+            )),
           behavior:HitTestBehavior.opaque,
         );
      },
     );
+  }
+
+  void _deleteTransaction(String id){
+    _usertransaction.removeWhere((tx){
+      return tx.id == id;
+    });
   }
   
   @override
@@ -106,7 +130,7 @@ final List<Transaction> _usertransaction = [
           child: Column(
             children: <Widget>[
               Chart(_recentTransactions),
-              TransactionLisst(_usertransaction),
+              TransactionLisst(_usertransaction,_deleteTransaction),
             ],
           ),
         ),

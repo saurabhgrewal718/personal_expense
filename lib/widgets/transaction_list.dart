@@ -10,8 +10,9 @@ class TransactionLisst extends StatelessWidget {
 
 // class _TransactionLisstState extends State<TransactionLisst> {
   final List<Transaction> transactions;
+  final Function deletetx;
 
-  TransactionLisst(this.transactions); 
+  TransactionLisst(this.transactions,this.deletetx); 
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,18 +34,25 @@ class TransactionLisst extends StatelessWidget {
                       decoration: BoxDecoration(border: Border.all(color: Colors.black,width: 2,)),
                       child: Text('\$ ${transactions[index].amount.toStringAsFixed(2)}',style: TextStyle(fontFamily: 'MuseoModerno', fontWeight: FontWeight.bold,fontSize: 20,color: Colors.purple),),
                     ),
-                    Column(
-                      crossAxisAlignment:CrossAxisAlignment.start ,
-                      children:<Widget>[
-                        Text(
-                          transactions[index].title,
-                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.black)),
-                        Text(
-                          DateFormat('dd/MM/yyyy').format(transactions[index].date),
-                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: Colors.black26),
-                        ),
-                      ],
+                    Expanded(
+                        child: Column(
+                        crossAxisAlignment:CrossAxisAlignment.start ,
+                        children:<Widget>[
+                          Text(
+                            transactions[index].title,
+                            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.black)),
+                          Text(
+                            DateFormat('dd/MM/yyyy').format(transactions[index].date),
+                            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: Colors.black26),
+                          ), 
+                        ],
+                      ),
                     ),
+                    IconButton(
+                        icon: Icon(Icons.delete),
+                        color: Colors.red[200],
+                        onPressed: () => deletetx(transactions[index].id),
+                      ),
                   ],)
                 );
                 },
