@@ -32,18 +32,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 final List<Transaction> _usertransaction = [
-    Transaction(
-      id:'t1',
-      amount: 89.87,
-      title: 'New Shoes',
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id:'t2',
-      amount: 8.87,
-      title: 'Shoes',
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id:'t1',
+    //   amount: 89.87,
+    //   title: 'New Shoes',
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id:'t2',
+    //   amount: 8.87,
+    //   title: 'Shoes',
+    //   date: DateTime.now(),
+    // ),
     // Transaction(
     //   id:'t3',
     //   amount: 9.87,
@@ -107,9 +107,7 @@ final List<Transaction> _usertransaction = [
   }
 
   void _deleteTransaction(String id){
-    _usertransaction.removeWhere((tx){
-      return tx.id == id;
-    });
+    _usertransaction.removeWhere((tx) => tx.id == id);
   }
   
   @override
